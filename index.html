@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>CJ's Coolest Website</title>
+        <style>
+            body {
+                background: rgb(56, 40, 197);
+                color: rgb(230, 225, 225);
+                padding: 10px;
+                font-family: cursive;
+            }
+            #all-contents {
+              max-width: 600px;
+                margin-right: 500px;
+            }
+         
+            /* navigation menu */
+            nav {
+                background: rgb(43, 31, 28);
+                margin: 0 auto;
+                margin-bottom: 20px;
+                display: flex;
+                padding: 10px;
+            }
+            h1 {
+                display: flex;
+                align-items: center;
+                color: white;
+                flex: 1;
+                margin: 0;
+            }
+            #nav-ul {
+                list-style-image: none;
+            }
+            .nav-li {
+                display: inline-block;
+                padding: 0 10px;
+            }
+            a {
+                text-decoration: none;
+                color: #fff;
+            }
+         
+            /* main container area beneath menu */
+            main {
+                background: rgb(43, 21, 28);
+                display: flex;
+            }
+            .sidebar {
+                margin-right: 25px;
+                padding: 10px;
+            }
+            .sidebar-img {
+                width: 400px;
+            }
+            .content {
+                flex: 1;
+                padding: 15px;
+            }
+            #interests {
+                border: 4px silver ridge;
+                padding: 8px;
+            }
+            h2, h3 {
+                margin: 0px;
+            }
+         </style>
+    </head>
+
+    <body> 
+        <!--all content goes here-->
+        <div>
+            <nav>
+                
+            </nav>
+                <h1>CJ's Coolest Website</h1>
+                <ul id="nav-ul">
+                    <li class="nav-li">
+                        <a href="index.html">Home</a> 
+                    </li>
+                    <li class="nav-ul">
+                        <a href="portfolio.html">Portfolio</a>
+                    </li>
+                </ul>
+            <main>
+                <!-- Side Bar -->
+                <div class="sidebar">
+                    <img class="sidebar-img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQs2ZIgyigsHJ3bTXdTQCJCqmLq8TrFmLZefn8SjoGjpvFqmf5DHaz5akMfBU1296sMWxA:https://lookaside.fbsbx.com/lookaside/crawler/media/%3Fmedia_id%3D2093951027428097&usqp=CAU">
+                </div>
+
+                <!-- Content -->
+                <div id="all-contents" class="content">
+                    <h2>CJ Boice</h2>
+                    <p>Student at Mandeville High School</p>
+                    <!-- Interest Section -->
+                    <div id="interests">
+                        <h2>Interest</h2>
+                        <ul>
+                            <li>Robotics</li>
+                            <li>Hunting</li>
+                            <li>Fishing</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </main>
+        </div>
+    </body>
+</html>
