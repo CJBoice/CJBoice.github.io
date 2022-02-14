@@ -13,11 +13,12 @@
 			text-align: center;
 			display: block;
 			position: absolute;
-			top: 100px;
-			left: 0px;  /* <--- Change me! */
+			top: 200px;
+			left: 300px;  /* <--- Change me! */
 		}
 		.board{
 			height: 100vh;
+			background-color: crimson;
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -40,15 +41,16 @@
 			var board = jQuery('.board');	// reference to the HTML .board element
 			var boardWidth = board.width();	// the maximum X-Coordinate of the screen
 
-			// Every 50 milliseconds, call the update Function (see below)
+			// Every 20 milliseconds, call the update Function (see below)
 			setInterval(update, 20);
 			
 			// Every time the box is clicked, call the handleBoxClick Function (see below)
 			box.on('click', handleBoxClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
-			function moveBoxTo(newPositionX) {
+			function moveBoxTo(newPositionX, newPositionY) {
 				box.css("left", newPositionX);
+				box.css("top", newPositionY);
 			}
 
 			// changes the text displayed on the Box
@@ -56,14 +58,24 @@
 				box.text(newText);
 			}
 
+
 			//////////////////////////////////////////////////////////////////
 			/////////////////// YOUR CODE BELOW HERE /////////////////////////
 			//////////////////////////////////////////////////////////////////
 			
 			// TODO 2 - Variable declarations 
-			var positionX = 0;
+			
+			//starting position and screen
+			var positionX = 30;
+			var positionY = 50;
+			var boardHeight = jQuery(window).height();
+
+			//angle and speed
+			var radianAngle;
+			var angle = 45;
 			var speed = 10;
 
+			//points
 			var points = 0;
 
 			
@@ -73,18 +85,41 @@
 			turn it around! 
 			*/
 			function update() {
-				//Your Code to Increase positionX by 10 HERE
-				positionX += speed;
-				moveBoxTo(positionX);
-
-				changeBoxText(points);
-
-				if ((positionX + 70) > boardWidth) {
-					speed *= -1;
-				} if (positionX < 0) {
-					speed *= -1;
+				//Angle overlap
+				if(angle > 180) {
+					angle -= 360;
+				} else if(angle < -180) {
+					angle += 360;
 				}
 
+				//convert angle to radians and -180 to 180
+				radianAngle = angle * (Math.PI / 180);
+
+				//move box distance of speed on any angle
+				positionX = positionX + (Math.cos(radianAngle) * speed);
+				positionY = positionY + (Math.sin(radianAngle) * speed);
+				moveBoxTo(positionX, positionY);
+
+				//Points
+				changeBoxText(points);
+
+				//X-axis Bouncing
+				if(angle === 0 && positionX + 60 > boardWidth) {
+					angle += 180;
+				} else if((angle === 180 || angle === -180) && positionX < 0) {
+					angle += 180;
+				} else if(angle !== 0 && positionX + 60 > boardWidth) {
+					angle = (angle * -1) + 180;
+				} else if((angle !== 180 || angle !== -180) && positionX < 0) {
+					angle = (angle * -1) + 180;
+				}
+
+				//Y-axis Bouncing
+				if(positionY < 0 || positionY + 60 > boardHeight) {
+					angle *= -1;
+				}
+
+				
 			};
 
 			/* 
@@ -93,15 +128,18 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-				positionX = 0;
+				// random X and Y postion
+				positionX = Math.random() * boardWidth;
+				positionY = Math.random() * boardHeight;
+
+				//random Angle
+				angle = Math.random() * 360;
+
+				//add to your score
 				points++;
-				if (speed < 0) {
-					speed -= 3;
-				} else {
-					speed += 3;
-				}
 
-
+				//increase speed after each click
+				speed += 3;
 			};
 		})();
 	</script>
