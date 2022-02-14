@@ -18,6 +18,7 @@
 		}
 		.board{
 			height: 100vh;
+			width: 100wv;
 			background-color: crimson;
 		}
 	</style>
@@ -40,12 +41,14 @@
 			var box = jQuery('.box');	// reference to the HTML .box element
 			var board = jQuery('.board');	// reference to the HTML .board element
 			var boardWidth = board.width();	// the maximum X-Coordinate of the screen
+			var boardHeight = jQuery(window).height(); // the max Y value of the screen
 
 			// Every 20 milliseconds, call the update Function (see below)
 			setInterval(update, 20);
 			
 			// Every time the box is clicked, call the handleBoxClick Function (see below)
 			box.on('click', handleBoxClick);
+			board.on('click', handleBoardClick);
 
 			// moves the Box to a new position on the screen along the X-Axis
 			function moveBoxTo(newPositionX, newPositionY) {
@@ -65,18 +68,20 @@
 			
 			// TODO 2 - Variable declarations 
 			
-			//starting position and screen
-			var positionX = 30;
-			var positionY = 50;
-			var boardHeight = jQuery(window).height();
+			//starting position
+			var positionX = Math.random() * (boardWidth - 60);
+			var positionY = Math.random() * (boardHeight - 60);
 
 			//angle and speed
 			var radianAngle;
-			var angle = 45;
+			var angle = Math.random() * 360;
 			var speed = 10;
 
 			//points
 			var points = 0;
+
+			//clicks
+			var numberOfClicks = 0;
 
 			
 			/* 
@@ -119,6 +124,13 @@
 					angle *= -1;
 				}
 
+				// handle the number of clicks
+				if(numberOfClicks >= 10 && points !== 0){
+					numberOfClicks = 0;
+					points--;
+					speed -= 3;
+				}
+
 				
 			};
 
@@ -129,8 +141,8 @@
 			*/
 			function handleBoxClick() {
 				// random X and Y postion
-				positionX = Math.random() * boardWidth;
-				positionY = Math.random() * boardHeight;
+				positionX = Math.random() * (boardWidth - 60);
+				positionY = Math.random() * (boardHeight - 60);
 
 				//random Angle
 				angle = Math.random() * 360;
@@ -140,7 +152,14 @@
 
 				//increase speed after each click
 				speed += 3;
+
+				//reset clicks
+				numberOfClicks = 0;
 			};
+
+			function handleBoardClick() {
+				numberOfClicks++;
+			}
 		})();
 	</script>
 </body>
