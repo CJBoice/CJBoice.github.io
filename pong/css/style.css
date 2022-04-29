@@ -24,10 +24,22 @@ html {
 
 #ball {
     background: white;
+    transform-origin: 50%;
     height: 20px;
     width: 20px;
     border-radius: 50%;
     position: absolute;
     top: 50%;
     left: 50%;
+}
+
+#score {
+    color: white;
+    position: absolute;
+    transform-origin: 50%;
+    width: 10%;
+    font-size: 400%;
+    top: 5%;
+    left: 45%;
+    text-align: center;
 }
