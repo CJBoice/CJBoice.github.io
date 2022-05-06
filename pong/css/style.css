@@ -8,7 +8,7 @@ html {
     background: white;
     width: 15px;
     height: 120px;
-    transform-origin: 0%;
+    transform-origin: 100%;
     position: absolute;
 }
 
@@ -42,4 +42,13 @@ html {
     top: 5%;
     left: 45%;
     text-align: center;
+}
+
+#debugger {
+    color: white;
+    background-color: black;
+    border-color: black;
+    position: absolute;
+    resize: none;
+    list-style-type: none;
 }

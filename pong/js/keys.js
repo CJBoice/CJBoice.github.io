@@ -3,7 +3,8 @@ let keys = {
     upArrow: false,
     downArrow: false,
     w: false,
-    s: false
+    s: false,
+    shift: false
 };
 
 //detect key presses
@@ -20,6 +21,9 @@ window.addEventListener('keydown', function(e) {
     if(e.which === 83){
         keys.s = true;
     }
+    if(e.which === 16){
+        keys.shift = true;
+    }
 });
 
 //detect key releases
@@ -35,5 +39,8 @@ window.addEventListener('keyup', function (e) {
     }
     if(e.which === 83){
         keys.s = false;
+    }
+    if(e.which === 16){
+        keys.shift = false;
     }
 });

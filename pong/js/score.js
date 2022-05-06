@@ -12,12 +12,12 @@ let isPlayerOneDead = false;
 
 //determines who lost rally
 function handleScoring(){
-    if((ballData.x - ballRadius) <= 0){
+    if(ballData.x <= 0){
         scores.player2 += 1;
         isPlayerOneDead = true;
         resetBall();
     }
-    if((ballData.x + ballRadius) >= window.innerWidth){
+    if((ballData.x + ballDiameter) >= window.innerWidth){
         scores.player1 += 1;
         isPlayerOneDead = false;
         resetBall();
@@ -41,6 +41,7 @@ function resetBall(){
     //paddle info
     paddle1.y = (.5 * window.innerHeight) - 60
     paddle2.y = (.5 * window.innerHeight) - 60
+    setTarget = 0;
 }
 
 function printScore(){

@@ -15,15 +15,23 @@ let paddle2 = {
     velocity: 10
 }
 
-//update function to move player
-function movePaddles() {
+//move players
+function moveMPaddles() {
 
     //player 1 paddle
     if(keys.w){
-        paddle1.y -= paddle1.velocity;
+        if(keys.shift){
+            paddle1.y -= paddle1.velocity + 10;
+        } else {
+            paddle1.y -= paddle1.velocity;
+        }
     }
     if(keys.s){
-        paddle1.y += paddle1.velocity;
+        if(keys.shift){
+            paddle1.y += paddle1.velocity + 10;
+        } else {
+            paddle1.y += paddle1.velocity;
+        }
     }
 
     //player 2 paddle

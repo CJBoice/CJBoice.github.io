@@ -1,8 +1,10 @@
 //update function
 setInterval( () => {
 
-    movePaddles();
+    // moveMPaddles();
+    moveSPaddles();
     moveBall();
     handleScoring();
+    // debug();
 
 }, 20);
