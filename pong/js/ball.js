@@ -8,7 +8,7 @@ let ballData = {
     x: .5 * window.innerWidth,
     y: .5 * window.innerHeight,
     angle: 180,
-    velocity: 10
+    velocity: 15
 }
 
 //other variables

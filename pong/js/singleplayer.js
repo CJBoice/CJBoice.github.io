@@ -1,4 +1,7 @@
+const helpBall = document.getElementById("help-ball");
+
 let setTarget = 0;
+let hasTarget = false;
 let direction = false;
 
 //move paddles
@@ -22,6 +25,7 @@ function moveSPaddles() {
 
     //player 2 paddle
     aiPaddle();
+    helpPaddle();
 
     //player 1 collisions
     if(paddle1.y > window.innerHeight - 120){
@@ -92,7 +96,35 @@ function aiPaddle(){
 
     if(direction === false){
         setTarget = 0;
+    } 
+}
+
+function helpPaddle(){
+
+    //find set target
+    if(direction === false && hasTarget === false){
+        let ball3 = {
+            x: ballData.x,
+            y: ballData.y,
+            angle: ballData.angle,
+            velocity: ballData.velocity
+        };
+
+        //create second ball to predict wehre to go
+        while (ball3.x > paddle1.x + 15){
+            ball3 = getBallMovement(ball3);
+        }
+
+        //set variables to go to
+        hasTarget = true;
+        helpBall.style.top = ball3.y.toString() + "px";
+        helpBall.style.left = (paddle1.x  + 15).toString() + "px";
+        helpBall.style.background = "green";
+        
     }
 
-    
+    if(direction === true){
+        helpBall.style.background = "black";
+        hasTarget = false;
+    } 
 }
