@@ -42,6 +42,7 @@ function resetBall(){
     paddle1.y = (.5 * window.innerHeight) - 60
     paddle2.y = (.5 * window.innerHeight) - 60
     setTarget = 0;
+    setTarget2 = 0;
 }
 
 function printScore(){

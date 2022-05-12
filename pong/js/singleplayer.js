@@ -1,5 +1,6 @@
 const helpBall = document.getElementById("help-ball");
 
+let setTarget2 = 0;
 let setTarget = 0;
 let hasTarget = false;
 let direction = false;
@@ -7,7 +8,7 @@ let direction = false;
 //move paddles
 function moveSPaddles() {
 
-    //player 1 paddle
+    // player 1 paddle
     if(keys.w || keys.upArrow){
         if(keys.shift){
             paddle1.y -= paddle1.velocity + 10;
@@ -26,6 +27,7 @@ function moveSPaddles() {
     //player 2 paddle
     aiPaddle();
     helpPaddle();
+    // aiPaddle1();
 
     //player 1 collisions
     if(paddle1.y > window.innerHeight - 120){
@@ -126,5 +128,59 @@ function helpPaddle(){
     if(direction === true){
         helpBall.style.background = "black";
         hasTarget = false;
+    } 
+}
+
+function aiPaddle1(){
+    //variables
+    let standardY = (window.innerHeight / 2) - 60;
+
+    //find set target
+    if(direction === false && setTarget2 === 0){
+        let ball4 = {
+            x: ballData.x,
+            y: ballData.y,
+            angle: ballData.angle,
+            velocity: ballData.velocity
+        };
+
+        //create second ball to predict wehre to go
+        while (ball4.x > paddle1.x + 15){
+            ball4 = getBallMovement(ball4);
+        }
+
+        //set variables to go to
+        let tolerance = Math.random() * 20;
+        setTarget2 = ball4.y - 60 - tolerance;
+        
+        
+    }
+
+    // move towards angle
+    if(direction === false){
+        if(Math.abs(paddle1.y - setTarget2) >= 10){
+            if(paddle1.y > setTarget2){
+                paddle1.y -= paddle1.velocity; 
+            } else if(paddle1.y < setTarget2){
+                paddle1.y += paddle1.velocity;
+            } 
+            else {
+                paddle1.y = setTarget2;
+            }
+        }
+    } else {
+        if(Math.abs(paddle1.y - standardY) >= 10){
+            if(paddle1.y > standardY){
+                paddle1.y -= paddle1.velocity; 
+            } else if(paddle1.y < standardY){
+                paddle1.y += paddle1.velocity;
+            } else {
+                paddle1.y = standardY;
+            }
+        }
+    }
+
+    if(direction === true){
+        setTarget2 = 0;
     } 
 }
